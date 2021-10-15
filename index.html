@@ -1,0 +1,101 @@
+<!--Credit: https://www.w3schools.com/js/js_array_sort.asp --
+   used to find sort function for array of numbers-->
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="utf-8">
+</head>
+<body>
+
+<h1>Lottery Sim</h1>
+<h2>Try Your Luck!</h2>
+
+<script type="text/javascript" language="javascript">
+
+ var winningnums, winluck;
+ var matchballs = 0;
+
+ function generate() {
+  return Math.floor((Math.random()*48 + 1));
+ }
+
+ var numone = generate(), numtwo = generate(), numthree = generate(), numfour = generate(), numfive = generate();
+ var templottonums = [numone, numtwo, numthree, numfour, numfive];
+ 
+ for (let i = 0; i < 5; i++) {
+  for (let j = 0; j < 5; j++) {
+   if (i != j && templottonums[i] == templottonums[j]) {
+    --j;
+    templottonums[j] = Math.floor((Math.random()*48 + 1));
+   }
+  }
+ }
+
+ var lottonums = templottonums;
+ lottonums.sort(function(a, b){return a - b});
+ var randomlucky = Math.floor(Math.random()*18 + 1);
+
+ winningnums = prompt("Enter the first 5 winning numbers separated by a space:");
+ winluck = prompt("Enter the lucky ball number: ");
+
+ var winarr = winningnums.split(" ");
+ winarr.sort(function(a, b){return a - b});
+
+ document.write("Today's lottery numbers: [" + lottonums + "]<br/><br/>");
+ document.write("Today's lucky ball: " + randomlucky + "<br/><br/>");
+ document.write("The winning numbers are: [" + winarr + "]<br/><br/>");
+ document.write("The lucky ball is: " + winluck + "<br/><br/>");
+
+
+ for (let k = 0; k < 5; k++) {
+  for (let l = 0; l < 5; l++) {
+   if (winarr[k] == lottonums[l]) {
+    matchballs = matchballs + 1;
+   }
+  }
+ }
+
+ document.write(matchballs + " numbers matched...! ");
+ if (matchballs == 0) {
+  if (winluck == randomlucky) {
+    document.write("The lucky ball... matched! Your payout is $4! <br/>");
+  } else {
+   document.write("The lucky ball... did not match! Your payout is $0. <br/>");
+  }
+ } else if (matchballs == 1) {
+  if (winluck == randomlucky) {
+   document.write("The lucky ball... matched! Your payout is $6! <br/>");
+  } else {
+    document.write("The lucky ball... did not match! Your payout is $0. <br/>");
+  }
+ } else if (matchballs == 2) {
+  if (winluck == randomlucky) {
+   document.write("The lucky ball... matched! Your payout is $25! <br/>");
+  } else {
+   document.write("The lucky ball... did not match! Your payout is $3. <br/>");
+  }
+ } else if (matchballs == 3) {
+  if (winluck == randomlucky) {
+   document.write("The lucky ball... matched! Your payout is $150! <br/>");
+  } else {
+   document.write("The lucky ball... did not match! Your payout is $20. <br/>");
+  }
+ } else if (matchballs == 4) {
+  if (winluck == randomlucky) {
+   document.write("The lucky ball... matched! Your payout is $5,000! <br/>");
+  } else {
+   document.write("The lucky ball... did not match! Your payout is $200. <br/>");
+  }
+ } else if (matchballs == 5) {
+  if (winluck == randomlucky) {
+   document.write("The lucky ball... matched! Your payout is $7,000 a WEEK for LIFE! <br/>");
+  } else {
+   document.write("The lucky ball... did not match! Your payout is $25,000 a YEAR for LIFE! <br/>");
+  }
+ }
+
+</script>
+</body>
+</html>
